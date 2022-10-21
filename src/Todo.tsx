@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { TTodo } from "../App";
 
 interface ITodoComponent {
@@ -8,9 +8,11 @@ interface ITodoComponent {
 
 export const Todo: FC<ITodoComponent> = ({ data }) => {
   return (
-    <View style={styles.todo}>
-      <Text>{data.title}</Text>
-    </View>
+    <TouchableOpacity>
+      <View style={styles.todo}>
+        <Text>{data.title}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 

@@ -1,11 +1,5 @@
 import React, { FC, useState } from "react";
-import {
-  Button,
-  GestureResponderEvent,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native";
+import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
 
 interface IAddTodo {
   onSubmit: (title: string) => void;
@@ -13,8 +7,6 @@ interface IAddTodo {
 
 export const AddTodo: FC<IAddTodo> = ({ onSubmit }) => {
   const [value, setValue] = useState("");
-
-  const handleChangeInput = (text: string) => setValue(text);
 
   const handleSubmit = () => {
     onSubmit(value);
@@ -26,9 +18,10 @@ export const AddTodo: FC<IAddTodo> = ({ onSubmit }) => {
       <TextInput
         style={styles.input}
         value={value}
-        onChangeText={handleChangeInput}
+        onChangeText={setValue}
+        placeholder="write todo"
       />
-      <Button title="Add" onPress={handleSubmit} />
+      <Button title="Add" onPress={handleSubmit} disabled={!value} />
     </View>
   );
 };

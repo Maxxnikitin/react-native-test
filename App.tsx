@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, ScrollView, FlatList } from "react-native";
 import { AddTodo } from "./src/AddTodo";
 import { Navbar } from "./src/Navbar";
 import { Todo } from "./src/Todo";
@@ -24,16 +24,17 @@ export default function App() {
   };
 
   return (
-    <View>
+    <View style={styles.allScreen}>
       <StatusBar style="auto" />
       <Navbar title="ToDo" />
       <View style={styles.content}>
         <AddTodo onSubmit={handleAddTodo} />
-        <View>
-          {todos.map((item) => (
-            <Todo key={item.id} data={item}></Todo>
-          ))}
-        </View>
+        <FlatList
+          style={styles.list}
+          keyExtractor={({ id }) => id}
+          data={todos}
+          renderItem={({ item }) => <Todo data={item}></Todo>}
+        ></FlatList>
       </View>
     </View>
   );
@@ -42,5 +43,12 @@ export default function App() {
 const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 20,
+    backgroundColor: "pink",
+  },
+  list: {
+    // height: "80%",
+  },
+  allScreen: {
+    backgroundColor: "lightblue",
   },
 });
